@@ -179,24 +179,25 @@ public class GameState {
                         return true;
                     }
                 }
-                //Move piece for RED
-            } else if (colors == Pieces.Colors.RED) {
+            }
+
+            //Move piece for RED
+        } else if (colors == Pieces.Colors.RED) {
 
                 //If a red piece is on left edge of board, it can only move diagonal down right
-                if (currPos.getY() == 0) {
-                    if (newPos.getY() == currPos.getY() + 1 && newPos.getX() == currPos.getX() + 1) {
-                        return true;
+            if (currPos.getY() == 0) {
+                if (newPos.getY() == currPos.getY() + 1 && newPos.getX() == currPos.getX() + 1) {
+                    return true;
 
-                        //If a red piece is on right edge of board, it can only move diagonal down left
-                    } else if (currPos.getY() == 7) {
-                        if (newPos.getY() == currPos.getY() - 1 && newPos.getX() == currPos.getX() + 1) {
-                            return true;
-                        }
-                        //If a red piece is on left edge of board, it can only move diagonal down right and left
-                    } else {
-                        if ((newPos.getY() == currPos.getY() + 1 && newPos.getX() == currPos.getX() + 1) || (newPos.getY() == currPos.getY() - 1 && newPos.getX() == currPos.getX() + 1)) {
-                            return true;
-                        }
+                    //If a red piece is on right edge of board, it can only move diagonal down left
+                } else if (currPos.getY() == 7) {
+                    if (newPos.getY() == currPos.getY() - 1 && newPos.getX() == currPos.getX() + 1) {
+                        return true;
+                    }
+                    //If a red piece is on left edge of board, it can only move diagonal down right and left
+                } else {
+                    if ((newPos.getY() == currPos.getY() + 1 && newPos.getX() == currPos.getX() + 1) || (newPos.getY() == currPos.getY() - 1 && newPos.getX() == currPos.getX() + 1)) {
+                        return true;
                     }
                 }
             }
@@ -261,9 +262,9 @@ public class GameState {
         if (selectedPiece.getType() == 0) {
             if (num == 0) {
                 // the player is trying to capture
-                if (x_coord_captured > x_coord_selected) {
+                if (y_coord_captured > y_coord_selected) {
                     // direction capture is up and to the right
-                    if (this.pieces[x_coord_selected + 2][y_coord_selected + 2] != null) {
+                    if (this.pieces[x_coord_selected - 2][y_coord_selected + 2].getColors() != Pieces.Colors.EMPTY) {
                         // capture space is occupied
                         return false;
                     } else {
@@ -272,7 +273,7 @@ public class GameState {
                     }
                 } else {
                     // direction capture is up and to the left
-                    if (this.pieces[x_coord_selected - 2][y_coord_selected + 2] != null) {
+                    if (this.pieces[x_coord_selected - 2][y_coord_selected - 2].getColors() != Pieces.Colors.EMPTY) {
                         return false;
                     } else {
                         return true;
@@ -280,9 +281,9 @@ public class GameState {
                 }
             } else {
                 // the AI is trying to capture
-                if (x_coord_captured > x_coord_selected) {
+                if (y_coord_captured > y_coord_selected) {
                     // direction capture is down and to the right
-                    if (this.pieces[x_coord_selected + 2][y_coord_selected - 2] != null) {
+                    if (this.pieces[x_coord_selected + 2][y_coord_selected + 2].getColors() != Pieces.Colors.EMPTY) {
                         // capture space is occupied
                         return false;
                     } else {
@@ -291,7 +292,7 @@ public class GameState {
                     }
                 } else {
                     // direction capture is down and to the left
-                    if (this.pieces[x_coord_selected - 2][y_coord_selected - 2] != null) {
+                    if (this.pieces[x_coord_selected + 2][y_coord_selected - 2].getColors() != Pieces.Colors.EMPTY) {
                         return false;
                     } else {
                         return true;
