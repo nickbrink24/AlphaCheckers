@@ -250,6 +250,11 @@ public class GameState {
             return false;
         }
 
+        // make sure the pieces are diagonal
+        if (!checkDiagonal(selectedPiece, capturePiece)) {
+            return false;
+        }
+
         // now just make sure the space to jump to isn't occupied
         // first check if the selected piece is just a regular piece vs a king
         if (selectedPiece.getType() == 0) {
@@ -297,6 +302,16 @@ public class GameState {
             // this piece is a king
             return false;
         }
+    }
+
+    public boolean checkDiagonal(Pieces selected, Pieces captured) {
+        int selX = selected.getX();
+        int selY = selected.getY();
+        int capX = captured.getX();
+        int capY = captured.getY();
+
+
+        return true;
     }
 
 
