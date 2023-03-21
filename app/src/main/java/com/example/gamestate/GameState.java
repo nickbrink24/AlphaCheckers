@@ -82,6 +82,7 @@ public class GameState {
                 }
             }
         }
+
         // set the turn
         turn = 0;
     }
@@ -95,6 +96,7 @@ public class GameState {
                 pieces[row][col] = GS.pieces[row][col];
             }
         }
+
         turn = GS.turn;
         emptyPiece = GS.emptyPiece;
     }
@@ -200,6 +202,7 @@ public class GameState {
 
             }
         }
+
         return false;
     }
 
@@ -222,6 +225,7 @@ public class GameState {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -251,7 +255,7 @@ public class GameState {
         }
 
         // make sure the pieces are diagonal
-        if (!checkDiagonal(selectedPiece, capturePiece)) {
+        if (!checkDiagonal(x_coord_selected, y_coord_selected, x_coord_captured, y_coord_captured)) {
             return false;
         }
 
@@ -304,14 +308,18 @@ public class GameState {
         }
     }
 
-    public boolean checkDiagonal(Pieces selected, Pieces captured) {
-        int selX = selected.getX();
-        int selY = selected.getY();
-        int capX = captured.getX();
-        int capY = captured.getY();
+    public boolean checkDiagonal(int selX, int selY, int capX, int capY) {
+        if (selX + 1 == capX && selY + 1 == capY) {
+            return true;
+        } else if (selX + 1 == capX && selY - 1 == capY) {
+            return true;
+        } else if (selX - 1 == capX && selY - 1 == capY) {
+            return true;
+        } else if (selX - 1 == capX && selY + 1 == capY) {
+            return true;
+        }
 
-
-        return true;
+        return false;
     }
 
 
@@ -331,6 +339,4 @@ public class GameState {
         }
         return toReturn;
     }
-
-
 }
