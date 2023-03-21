@@ -12,8 +12,9 @@ import android.widget.TextView;
  * @author Ruth
  * @author Nick
  * @author Ethan
- * @version 3.16.2023
- */
+ * @version 3.21.2023
+ **/
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TextView textView; // text displayed in xml
@@ -23,7 +24,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private GameState secondInstance;
     private GameState thirdInstance;
     private GameState fourthInstance;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,28 +43,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (view.getId() == runTest.getId()) {
             textView.setText("");
         }
+
         // Initial board
         if (clicks == 0) {
             textView.append("Initial Board:\n" + firstInstance);
             textView.append("Board is made.\n");
         }
+
         // First player will move piece in first instance
-        int who = firstInstance.getTurn(); // who is whoever's turn it is
+        int who = firstInstance.getTurn(); // 'who' is whoever's turn it is
         String player = "";
         if (who == 1) {
             player = "AI";
         } else {
             player = "Player";
         }
+
         // Change who's turn it is
         textView.append(player + "'s Turn\n");
         textView.append(player + " will move checker piece.\n");
+
         // Capture a piece if it is valid
-        if(canMove()){
-            if(canCapture()){
+        if(canMove()) {
+            if(canCapture()) {
                 textView.append(player + " has captured a piece!\n");
                 makeCapture();
             }
+
             movePiece();
         }
 
@@ -73,13 +78,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (promote == false) {
             textView.append(player + "'s piece cannot advance.\n");
         }
+
         clicks++; // keeps track of turn
         firstInstance.setTurn(who); // change turn
+
         // Displays updated board
-        textView.append(String.valueOf(firstInstance) + "\n\n");
+        textView.append(firstInstance + "\n\n");
         if (clicks == 3) {
             textView.append("Click again.\n");
         }
+
         if (clicks > 3) {
             textView.append("" + secondInstance);
             textView.append("\n");
@@ -89,9 +97,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * Checkes if move is valid
+     * Checks if move is valid
      * @return true if the piece can move to desired spot
-     */
+     **/
     public boolean canMove() {
         boolean move = false;
         if (clicks == 0) {
@@ -107,12 +115,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             move = firstInstance.checkPiece(firstInstance.getTurn(),firstInstance.getPieces(4,4))
             && firstInstance.checkMove(firstInstance.getTurn(),firstInstance.getPieces(4,4), firstInstance.getPieces(4,3));
         }
+
         return move;
     }
 
     /**
      * Moves actual piece
-     */
+     **/
     public void movePiece() {
         if (clicks == 0) {
             firstInstance.setPieces(4, 4, firstInstance.getPieces(4, 6));
@@ -128,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * Adds captured piece to captured arraylist
-     */
+     **/
     public void makeCapture() {
         int currPlayer = firstInstance.getTurn();
         if (currPlayer == 0) {
@@ -139,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * Checks if piece can capture at desired location
      * @return True if they can capture and move to location
-     */
+     **/
     public boolean canCapture() {
         boolean capture = false;
         if (clicks == 0) {
@@ -149,6 +158,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (clicks == 2) {
             capture = firstInstance.checkCapture(firstInstance.getTurn(),firstInstance.getPieces(4,4),firstInstance.getPieces(3,3));
         }
+
         return capture;
     }
 }

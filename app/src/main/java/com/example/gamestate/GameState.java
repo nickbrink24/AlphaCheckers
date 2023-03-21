@@ -8,8 +8,8 @@ import java.util.ArrayList;
  * @author Ruth
  * @author Nick
  * @author Ethan
- * @version 3.16.2023
- */
+ * @version 3.21.2023
+ **/
 
 public class GameState {
 
@@ -118,7 +118,7 @@ public class GameState {
         return turn;
     }
 
-    //set move of player
+    //set turn of player
     public void setTurn(int num) {
         if (num == 0) {
             turn = 1;
@@ -153,6 +153,7 @@ public class GameState {
             Pieces.Colors color = Pieces.Colors.RED;
             return movePiece(currPos, newPos, color);
         }
+
         return false;
     }
 
@@ -199,28 +200,25 @@ public class GameState {
                         }
                     }
                 }
-
             }
         }
 
         return false;
     }
 
-
     //check if piece can be promoted at its current position
     public boolean checkPromotion(Pieces pieces, Pieces.Colors colors) {
         //determines current position of piece
         int x_coord = pieces.getX();
 
-        //if x coordinate of piece is at end of board return true
-        //it can be promoted
         if (colors == Pieces.Colors.BLACK) {
+            //if x coordinate of piece is at end of board return true
             if (x_coord == 0) {
                 return true;
             }
 
-            //if x coordinate of red piece is at end of board return true;
         } else if (colors == Pieces.Colors.RED) {
+            //if x coordinate of red piece is at end of board return true;
             if (x_coord == 7) {
                 return true;
             }
@@ -322,7 +320,6 @@ public class GameState {
         return false;
     }
 
-
     //toString method prints board
     @Override
     public String toString() {
@@ -337,6 +334,7 @@ public class GameState {
             }
             toReturn += "\n";
         }
+
         return toReturn;
     }
 }

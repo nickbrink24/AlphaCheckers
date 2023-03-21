@@ -1,14 +1,14 @@
 package com.example.gamestate;
 
-
 /**
  * @author Griselda
  * @author Katherine
  * @author Ruth
  * @author Nick
  * @author Ethan
- * @version 3.16.2023
- */
+ * @version 3.21.2023
+ **/
+
 public class Pieces {
 
     public enum Colors {
@@ -19,7 +19,6 @@ public class Pieces {
     private Colors color; // color of the piece
     private int x; // x coord of piece
     private int y; // y coord of piece
-
 
     // Constructor
     public Pieces(int type, Colors color, int x, int y) {
@@ -73,15 +72,15 @@ public class Pieces {
     // toString method that prints the information of the piece
     @Override
     public String toString() {
-        // if piece is red, print R
         if (color == Colors.RED) {
+            // if piece is red, print R
             return "R\t";
-            //if piece is black, print B
         } else if (color == Colors.BLACK) {
+            //if piece is black, print B
             return "B\t";
         }
+
         //if piece is empty, print E
         return "E\t";
     }
 }
-
