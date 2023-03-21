@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author Nick
  * @author Ethan
  * @version 3.21.2023
- **/
+ */
 
 public class GameState {
 
@@ -134,7 +134,6 @@ public class GameState {
     public ArrayList<Pieces> capturedRed() {
         return capturedRed;
     }
-
 
     //check if selected piece belongs to player
     public boolean checkPiece(int num, Pieces piece) {

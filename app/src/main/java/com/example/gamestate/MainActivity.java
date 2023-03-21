@@ -13,7 +13,7 @@ import android.widget.TextView;
  * @author Nick
  * @author Ethan
  * @version 3.21.2023
- **/
+ */
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             player = "Player";
         }
 
-        // Change who's turn it is
+        // Change whose turn it is
         textView.append(player + "'s Turn\n");
         textView.append(player + " will move checker piece.\n");
 
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * Checks if move is valid
      * @return true if the piece can move to desired spot
-     **/
+     */
     public boolean canMove() {
         boolean move = false;
         if (clicks == 0) {
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * Moves actual piece
-     **/
+     */
     public void movePiece() {
         if (clicks == 0) {
             firstInstance.setPieces(4, 4, firstInstance.getPieces(4, 6));
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * Adds captured piece to captured arraylist
-     **/
+     */
     public void makeCapture() {
         int currPlayer = firstInstance.getTurn();
         if (currPlayer == 0) {
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * Checks if piece can capture at desired location
      * @return True if they can capture and move to location
-     **/
+     */
     public boolean canCapture() {
         boolean capture = false;
         if (clicks == 0) {

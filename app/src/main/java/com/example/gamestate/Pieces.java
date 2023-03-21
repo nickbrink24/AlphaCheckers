@@ -7,7 +7,7 @@ package com.example.gamestate;
  * @author Nick
  * @author Ethan
  * @version 3.21.2023
- **/
+ */
 
 public class Pieces {
 
