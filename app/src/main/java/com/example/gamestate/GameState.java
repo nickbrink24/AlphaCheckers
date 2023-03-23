@@ -300,10 +300,41 @@ public class GameState {
                 }
             }
 
-        } else {
-            // this piece is a king
-            return false;
+        } else if (selectedPiece.getType() == 1) {
+            if (y_coord_captured > y_coord_selected && x_coord_captured > x_coord_selected) {
+                // direction capture is down and to the right
+                if (this.pieces[x_coord_selected + 2][y_coord_selected + 2].getColors() != Pieces.Colors.EMPTY) {
+                    // capture space is occupied
+                    return false;
+                } else {
+                    // capture space isn't occupied
+                    return true;
+                }
+            } else if (y_coord_captured < y_coord_selected && x_coord_captured > x_coord_selected) {
+                // direction capture is down and to the left
+                if (this.pieces[x_coord_selected + 2][y_coord_selected - 2].getColors() != Pieces.Colors.EMPTY) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } else if (y_coord_captured > y_coord_selected && x_coord_captured < x_coord_selected) {
+                // direction capture is up and to the right
+                if (this.pieces[x_coord_selected - 2][y_coord_selected + 2].getColors() != Pieces.Colors.EMPTY) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } else if (y_coord_captured < y_coord_selected && x_coord_captured < x_coord_selected) {
+                // direction capture is up and to the left
+                if (this.pieces[x_coord_selected - 2][y_coord_selected - 2].getColors() != Pieces.Colors.EMPTY) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
         }
+
+        return false;
     }
 
     public boolean checkDiagonal(int selX, int selY, int capX, int capY) {
