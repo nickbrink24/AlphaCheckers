@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        textView = findViewById(R.id.editText);
-        runTest = findViewById(R.id.runTest);
+
+        CheckerView cv = findViewById(R.id.board);
         runTest.setOnClickListener(this::onClick);
         firstInstance = new GameState();
         secondInstance = new GameState(firstInstance);

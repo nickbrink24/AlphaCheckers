@@ -9,23 +9,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/editText"
-            android:inputType="textMultiLine"
+        android:orientation="horizontal">
+        <com.example.gamestate.CheckerView
+            android:id="@+id/board"
             android:layout_width="match_parent"
-            android:layout_height="600dp"
-            android:gravity="start|top" />
-
-        <Button
-            android:id="@+id/runTest"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Run Test" />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#000000" />
     </LinearLayout>
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
