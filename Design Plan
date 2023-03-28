@@ -1,0 +1,54 @@
+Design Presentation (DUE THURSDAY 3/29 at 8am):
+ 
+-       UML Class Diagram – Katherine
+-       Algorithm – Griselda
+o   Check capture piece: code on github repos with explanations
+§  Check diagonal method that checks the surroundings of the selected piece
+§  If the piece is on the border of the board (row = 0,7 and col = 0,7) then the piece cannot be captured
+·      Method called checkDiagonal that returns true if there is a piece diagonal to the selected piece
+§  In the actual checkCapture method, it will check for open spaces that are two diagonal away given that checkDiagonal returns true
+-       Test Plan Sample - Ethan 
+o   Capture a piece
+o   Move a piece
+o   Promote a piece
+-       Schedule - Griselda
+o   Needs 6 major milestones and when they will be achieved – has to be things that we have not set achieved.
+§  1- all 5/5 classes finished(alpha release)
+§  2- add start-up screen
+§  3- 
+§  4- 3/3 tests working
+§  5-
+§  6- 
+ 
+BY WEDNESDAY MORNING: FINISH CONTENT FOR SLIDES SO THAT IT CAN BE PROOFREAD, EDITED, AND REFORMATTED 
+
+
+ROLES
+
+MOTIONEVENT - ETHAN AND KATHERINE
+
+DRAW BOARD/IMPORT PIECES - GRISELDA AND RUTH(???)
+
+DEBUG/EDIT AND TEST MAKEMOVE AND CAPTURE - ETHAN AND NICK
+
+Alpha Testing (DUE THURSDAY APRIL 6th at 8AM):
+-       HIGHEST IMPORTANCE: GRAPHICS AND BOARD FOR VISUAL TESTING
+o   Board is going to be drawn using basic java graphics
+o   Pieces are going to be images that we can just get online and put in res folder
+§  Only 4 images needed (red piece, black piece, kings of both)
+
+-   SECOND IMPORTANCE: IMPLEMENTING MOTIONTOUCH
+	- motionevent to get the coordinates for where the user touches
+		- Theoretically, let's say squares are length 100
+- the row and col coordinate / 100 will give you the index of the 2d array
+	- ONDRAW: DRAW BOARD WITH SET SIZE OF SQUARES TO HELP IMPLEMENT ABOVE
+	- Every time an action is made, invalidate() to update the board based off the positions in the 2d array (may have to use loop to get entire info of array)
+
+Basic debug/edits to makeMove and capture methods
+
+-       Bare Minimum: Just launch straight into the game and be able to play the game (Have the buttons, but they do not need to be perfectly implemented)
+
+
+
+
+
