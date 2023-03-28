@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         CheckerView cv = findViewById(R.id.board);
-        runTest.setOnClickListener(this::onClick);
+
         firstInstance = new GameState();
         secondInstance = new GameState(firstInstance);
         thirdInstance = new GameState();
@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void onClick(View view) {
+
+
         // Empties text
         if (view.getId() == runTest.getId()) {
             textView.setText("");
