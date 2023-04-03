@@ -12,7 +12,7 @@ import android.view.View;
 
 public class CheckerView extends SurfaceView implements View.OnTouchListener{
 
-    protected Paint image;
+    protected Paint imagePaint;
     private Paint squareColor;
     private Paint highLight;
     private Paint dotPaint;
@@ -134,6 +134,32 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
                 //draw rectangle
                 canvas.drawRect(left + (right - left) * i, top + (bottom - top) * j, right +
                         (right - left) * i, bottom + (bottom - top) * j, squareColor);
+            }
+        }
+
+        //draw all the pieces
+        for(int row = 0; row < pieces.length; row++) {
+            for (int col = 0; col < pieces[row].length; col++) {
+
+                //draw black pawns
+                if(pieces[row][col].getType() == 0 && pieces[row][col].getColors() == Pieces.Colors.BLACK) {
+                    canvas.drawBitmap(blackPawn, 50 + (row * 100), 50 + (col * 100), imagePaint);
+                }
+
+                //draw black kings
+                if(pieces[row][col].getType() == 1 && pieces[row][col].getColors() == Pieces.Colors.BLACK) {
+                    canvas.drawBitmap(blackKing, 50 + (row * 100), 50 + (col * 100), imagePaint);
+                }
+
+                //draw red pawns
+                if(pieces[row][col].getType() == 1 && pieces[row][col].getColors() == Pieces.Colors.RED) {
+                    canvas.drawBitmap(redPawn, 50 + (row * 100), 50 + (col * 100), imagePaint);
+                }
+
+                //draw red kings
+                if(pieces[row][col].getType() == 1 && pieces[row][col].getColors() == Pieces.Colors.RED) {
+                    canvas.drawBitmap(redKing, 50 + (row * 100), 50 + (col * 100), imagePaint);
+                }
             }
         }
     }
