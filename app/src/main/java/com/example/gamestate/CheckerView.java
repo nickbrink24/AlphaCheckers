@@ -1,6 +1,8 @@
 package com.example.gamestate;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -13,12 +15,18 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
     protected Paint image;
     private Paint squareColor;
     private Paint highLight;
+    private Paint dotPaint;
 
     private float top;
     private float left;
     private float bottom;
     private float right;
     private float size;
+
+    protected Bitmap blackPawn;
+    protected Bitmap redPawn;
+    protected Bitmap blackKing;
+    protected Bitmap redKing;
 
     private Pieces[][] pieces;
     private int[][] board;
@@ -38,7 +46,15 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
         squareColor = new Paint();
         squareColor.setColor(Color.BLACK);
         highLight = new Paint();
-        highLight.setColor(Color.GREEN);
+        highLight.setColor(Color.YELLOW);
+        dotPaint = new Paint();
+        dotPaint.setColor(Color.GREEN);
+
+        blackPawn = BitmapFactory.decodeResource(getResources(), R.drawable.bp);
+        blackKing = BitmapFactory.decodeResource(getResources(), R.drawable.bk);
+        redPawn = BitmapFactory.decodeResource(getResources(), R.drawable.rp);
+        redKing = BitmapFactory.decodeResource(getResources(), R.drawable.rk);
+
 
         placePieces();
     }
