@@ -12,27 +12,41 @@ import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
 
+import java.util.ArrayList;
+
 public class CheckerView extends SurfaceView implements View.OnTouchListener{
 
 
+    //paint variables
     protected Paint imagePaint;
     private Paint squareColor;
     private Paint highLight;
     private Paint dotPaint;
 
+    //variables for creating board with dimensions
     private float top;
     private float left;
     private float bottom;
     private float right;
     private float size;
 
+    //variables for piece images
     protected Bitmap blackPawn;
     protected Bitmap redPawn;
     protected Bitmap blackKing;
     protected Bitmap redKing;
 
+    //Variables to manipulate board
     private Pieces[][] pieces;
     private int[][] board;
+
+    //Arraylists to store possible moves
+    private ArrayList<Integer> xMoves = new ArrayList<>();
+    private ArrayList<Integer> yMoves = new ArrayList<>();
+
+    //dimensions of board
+    private int row = 8;
+    private int col = 8;
 
     public CheckerView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -171,6 +185,80 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
                 }
             }
         }
+    }
+
+    /**
+     * Method to move a regular pawn
+     */
+    public void movePawn() {
+
+        //check pawn on left most side of the board
+        if (col == 0) {
+            if(pieces[row - 1][col + 1].getColors() == Pieces.Colors.EMPTY){
+                xMoves.add(row - 1);
+                yMoves.add(col + 1);
+            }
+
+            //check if it can capture a piece
+            if (pieces[row - 1][col + 1].getColors() == Pieces.Colors.BLACK && pieces[row - 2][col + 2].getColors() == Pieces.Colors.EMPTY) {
+                xMoves.add(row - 2);
+                yMoves.add(col + 2);
+            }
+        }
+
+        //check pawn on right most side of the board
+        else if (col == 7) {
+            if(pieces[row - 1][col - 1].getColors() == Pieces.Colors.EMPTY) {
+                xMoves.add(row - 1);
+                yMoves.add(col - 1);
+            }
+
+            //check if it can capture a piece
+            if(pieces[row - 1][col - 1].getColors() == Pieces.Colors.BLACK && pieces[row - 2][col - 2].getColors() == Pieces.Colors.EMPTY) {
+                xMoves.add(row - 2);
+                yMoves.add(col - 2);
+            }
+        }
+
+        //pawn is not on the border of the board
+        else {
+            if (pieces[row - 1][col - 1].getColors() == Pieces.Colors.EMPTY) {
+                xMoves.add(row - 1);
+                yMoves.add(col - 1);
+            }
+            if(pieces[row - 1][col + 1].getColors() == Pieces.Colors.EMPTY){
+                xMoves.add(row - 1);
+                yMoves.add(col + 1);
+            }
+        }
+
+        //check remaining captures
+        if (col == 1) {
+            if(pieces[row - 1][col + 1].getColors() == Pieces.Colors.BLACK && pieces[row - 2][col + 2].getColors() == Pieces.Colors.EMPTY) {
+                xMoves.add(row - 2);
+                yMoves.add(col + 2);
+            }
+        }
+
+        else if (col == 6) {
+            if(pieces[row - 1][col - 1].getColors() == Pieces.Colors.BLACK && pieces[row - 2][col - 2].getColors() == Pieces.Colors.EMPTY) {
+                xMoves.add(row - 2);
+                yMoves.add(col - 2);
+            }
+        }
+
+        else {
+            if (pieces[row - 1][col - 1].getColors() == Pieces.Colors.BLACK && pieces[row - 2][col - 2].getColors() == Pieces.Colors.EMPTY) {
+                xMoves.add(row - 2);
+                yMoves.add(col - 2);
+            }
+            if(pieces[row - 1][col + 1].getColors() == Pieces.Colors.BLACK && pieces[row - 2][col + 2].getColors() == Pieces.Colors.EMPTY){
+                xMoves.add(row - 1);
+                yMoves.add(col + 2);
+            }
+        }
+
+
     }
 
 
