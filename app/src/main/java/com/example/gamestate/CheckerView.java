@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
@@ -31,8 +32,8 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
     private Pieces[][] pieces;
     private int[][] board;
 
-    public CheckerView(Context context) {
-        super(context);
+    public CheckerView(Context context, AttributeSet attrs) {
+        super(context, attrs);
         setWillNotDraw(false);
 
         pieces = new Pieces[8][8];
@@ -63,6 +64,7 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
         redKing = Bitmap.createScaledBitmap(redKing, 100, 100, false);
 
         placePieces();
+        setBackgroundColor(Color.LTGRAY);
     }
 
 
@@ -173,6 +175,7 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+
 
         return false;
     }
