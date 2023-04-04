@@ -7,11 +7,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
 
 public class CheckerView extends SurfaceView implements View.OnTouchListener{
+
+    Pieces piece;
 
     protected Paint imagePaint;
     private Paint squareColor;
@@ -173,9 +176,21 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
 
 
 
+    public void setPieces(Pieces piece) {
+        this.piece = piece;
+    }
+
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        int touchedX = (int)event.getX() - 50;
+        int touchedY = (int)event.getY() - 50;
 
+        int x_idx = touchedY / 100;
+        int y_idx = touchedX / 100;
+
+        Log.i("X INDEX", Integer.toString(x_idx));
+        Log.i("Y INDEX", Integer.toString(y_idx));
+        Log.i("MSG", pieces[x_idx][y_idx].toString());
 
         return false;
     }
