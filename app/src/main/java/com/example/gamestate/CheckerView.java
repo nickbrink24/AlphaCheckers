@@ -95,7 +95,7 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
 
                 //fill sixth and eighth row with red pieces
                 else if (col == 5 || col == 7) {
-                    if (row % 2 == 0) {
+                    if (row % 2 != 0) {
                         pieces[row][col] = new Pieces(0, Pieces.Colors.RED, row, col);
                     }
                     //fill rest of sixth and eighth row with empty pieces
@@ -106,7 +106,7 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
 
                 //fill seventh row with red pieces
                 else if (col == 6) {
-                    if (row % 2 != 0) {
+                    if (row % 2 == 0) {
                         pieces[row][col] = new Pieces(0, Pieces.Colors.RED, row, col);
                     }
                     //fill rest of seventh row with empty pieces
@@ -157,7 +157,7 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
                 }
 
                 //draw red pawns
-                if(pieces[row][col].getType() == 1 && pieces[row][col].getColors() == Pieces.Colors.RED) {
+                if(pieces[row][col].getType() == 0 && pieces[row][col].getColors() == Pieces.Colors.RED) {
                     canvas.drawBitmap(redPawn, 50 + (row * 100), 50 + (col * 100), imagePaint);
                 }
 
@@ -173,6 +173,7 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+
         return false;
     }
 }
