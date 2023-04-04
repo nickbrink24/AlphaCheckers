@@ -188,6 +188,18 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
     }
 
     /**
+     * Method to determine what kind of move a piece should make based on its status
+     */
+    public void movePiece(){
+        if (pieces[row][col].getType() == 0) {
+            movePawn();
+        }
+        else {
+            moveKing();
+        }
+    }
+
+    /**
      * Method to move a regular pawn
      */
     public void movePawn() {
@@ -257,7 +269,15 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
                 yMoves.add(col + 2);
             }
         }
+    }
 
+    //movement for kings
+    public void moveKing() {
+
+    }
+
+    //movement for AI
+    public void opponentMove() {
 
     }
 
