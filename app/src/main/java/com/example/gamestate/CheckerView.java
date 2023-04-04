@@ -50,11 +50,17 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
         dotPaint = new Paint();
         dotPaint.setColor(Color.GREEN);
 
+        //decode resources of piece images
         blackPawn = BitmapFactory.decodeResource(getResources(), R.drawable.bp);
         blackKing = BitmapFactory.decodeResource(getResources(), R.drawable.bk);
         redPawn = BitmapFactory.decodeResource(getResources(), R.drawable.rp);
         redKing = BitmapFactory.decodeResource(getResources(), R.drawable.rk);
 
+        //scale the images of the pieces
+        blackPawn = Bitmap.createScaledBitmap(blackPawn, 100, 100, false);
+        blackKing = Bitmap.createScaledBitmap(blackKing, 100, 100, false);
+        redPawn = Bitmap.createScaledBitmap(redPawn, 100, 100, false);
+        redKing = Bitmap.createScaledBitmap(redKing, 100, 100, false);
 
         placePieces();
     }
@@ -123,12 +129,11 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
 
-
                 //alternate colors of squares to create checkerboard pattern
                 if ((i % 2 == 0 && j % 2 != 0) || (j % 2 == 0 && i % 2 != 0)) {
-                    squareColor.setColor(Color.WHITE);
-                } else {
                     squareColor.setColor(Color.BLACK);
+                } else {
+                    squareColor.setColor(Color.WHITE);
                 }
 
                 //draw rectangle

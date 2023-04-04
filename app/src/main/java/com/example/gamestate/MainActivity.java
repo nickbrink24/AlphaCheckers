@@ -17,9 +17,6 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView textView; // text displayed in xml
-    private Button runTest; // button runs test
-    private int clicks; // clicks made on button
 
 
     @Override
@@ -28,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         CheckerView cv = findViewById(R.id.board);
+        cv.setOnTouchListener(cv);
 
     }
 
