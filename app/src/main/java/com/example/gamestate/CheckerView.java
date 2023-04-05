@@ -45,8 +45,8 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
     private ArrayList<Integer> yMoves = new ArrayList<>();
 
     //dimensions of board
-    private int row = 8;
-    private int col = 8;
+    private int row = 7;
+    private int col = 7;
 
     public CheckerView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -303,12 +303,12 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
                     if (motionEvent.getX() > 20 + (i * 115) && motionEvent.getX() < 175 + (i * 115)) {
                         if (motionEvent.getY() > 20 + (j * 115) && motionEvent.getY() < 175 + (j * 115)) {
                             for (int index = 0; index < xMoves.size(); index++) {
-                                if(xMoves.get(index) == i && yMoves.get(index) == j) {
-                                    pieces[i][j] = pieces [row][col];
+                                if(xMoves.get(index) == j && yMoves.get(index) == i) {
+                                    pieces[j][i] = pieces [row][col];
                                     pieces[row][col] = new Pieces(0,Pieces.Colors.EMPTY, row, col);
                                     board[row][col] = 0;
                                     for (int k = 0; k < xMoves.size(); k++){
-                                        board[xMoves.get(k)][yMoves.get(k)] = 0;
+                                        board[yMoves.get(k)][xMoves.get(k)] = 0;
                                     }
                                     xMoves.clear();
                                     yMoves.clear();
@@ -321,20 +321,20 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
                                 for (int index = 0; index < xMoves.size(); index++) {
                                     board[xMoves.get(index)][yMoves.get(index)] = 0;
                                 }
-                                row = 8;
-                                col = 8;
+                                row = 7;
+                                col = 7;
                                 xMoves.clear();
                                 yMoves.clear();
                                 invalidate();
-                                if (pieces[i][j].getColors() == Pieces.Colors.BLACK || pieces[i][j].getColors() == Pieces.Colors.EMPTY){
+                                if (pieces[j][i].getColors() == Pieces.Colors.BLACK || pieces[i][j].getColors() == Pieces.Colors.EMPTY){
                                     return true;
                                 }
                             }
-                            if(pieces[i][j].getColors() == Pieces.Colors.BLACK || pieces[i][j].getColors() == Pieces.Colors.EMPTY) {
+                            if(pieces[j][i].getColors() == Pieces.Colors.BLACK || pieces[i][j].getColors() == Pieces.Colors.EMPTY) {
                                 return true;
                             }
-                            row = i;
-                            col = j;
+                            row = j;
+                            col = i;
                             board[row][col] = 1;
 
                             movePiece();
