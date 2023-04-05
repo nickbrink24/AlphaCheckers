@@ -11,6 +11,9 @@ package com.example.gamestate;
 
 public class Pieces {
 
+    public Pieces() {
+        //does nothing
+    }
     public enum Colors {
         BLACK, RED, EMPTY
     }

@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         CheckerView cv = findViewById(R.id.board);
         cv.setOnTouchListener(cv);
 
+
     }
 
 
