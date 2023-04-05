@@ -34,6 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Pieces Captured"
+                android:textAlignment="viewStart"
                 android:textStyle="bold" />
 
             <Space
@@ -95,6 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:backgroundTint="#575757"
                     android:text="Reset"
                     android:textColorLink="#4A4A4A" />
 
@@ -108,6 +110,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:backgroundTint="#575757"
                     android:text="Home" />
             </LinearLayout>
         </LinearLayout>
