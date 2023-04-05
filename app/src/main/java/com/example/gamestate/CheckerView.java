@@ -203,7 +203,6 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
      * Method to move a regular pawn
      */
     public void movePawn() {
-
         //check pawn on left most side of the board
         if (col == 0) {
             if(pieces[row - 1][col + 1].getColors() == Pieces.Colors.EMPTY){
@@ -258,18 +257,18 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
                 yMoves.add(col - 2);
             }
         }
-
+/*
         else {
             if (pieces[row - 1][col - 1].getColors() == Pieces.Colors.BLACK && pieces[row - 2][col - 2].getColors() == Pieces.Colors.EMPTY) {
                 xMoves.add(row - 2);
                 yMoves.add(col - 2);
-            }
-            if(pieces[row - 1][col + 1].getColors() == Pieces.Colors.BLACK && pieces[row - 2][col + 2].getColors() == Pieces.Colors.EMPTY){
-                xMoves.add(row - 1);
-                yMoves.add(col + 2);
-            }
+            }*/
+            //if(pieces[row - 1][col + 1].getColors() == Pieces.Colors.BLACK && pieces[row - 2][col + 2].getColors() == Pieces.Colors.EMPTY){
+              //  xMoves.add(row - 1);
+                //yMoves.add(col + 2);
+           // }
         }
-    }
+
 
     //movement for kings
     public void moveKing() {
