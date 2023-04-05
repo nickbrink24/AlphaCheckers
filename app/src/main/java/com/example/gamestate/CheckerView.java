@@ -55,8 +55,8 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
         pieces = new Pieces[8][8];
         board = new int[8][8];
 
-        size = 100;
-        left = top = 50;
+        size = 115;
+        left = top = 40;
         right = left + size;
         bottom = top + size;
 
@@ -74,10 +74,10 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
         redKing = BitmapFactory.decodeResource(getResources(), R.drawable.rk);
 
         //scale the images of the pieces
-        blackPawn = Bitmap.createScaledBitmap(blackPawn, 100, 100, false);
-        blackKing = Bitmap.createScaledBitmap(blackKing, 100, 100, false);
-        redPawn = Bitmap.createScaledBitmap(redPawn, 100, 100, false);
-        redKing = Bitmap.createScaledBitmap(redKing, 100, 100, false);
+        blackPawn = Bitmap.createScaledBitmap(blackPawn, 115, 115, false);
+        blackKing = Bitmap.createScaledBitmap(blackKing, 115, 115, false);
+        redPawn = Bitmap.createScaledBitmap(redPawn, 115, 115, false);
+        redKing = Bitmap.createScaledBitmap(redKing, 115, 115, false);
 
         placePieces();
         setBackgroundColor(Color.LTGRAY);
@@ -166,22 +166,22 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
 
                 //draw black pawns
                 if(pieces[row][col].getType() == 0 && pieces[row][col].getColors() == Pieces.Colors.BLACK) {
-                    canvas.drawBitmap(blackPawn, 50 + (col * 100), 50 + (row * 100), imagePaint);
+                    canvas.drawBitmap(blackPawn, 40 + (col * 115), 40 + (row * 115), imagePaint);
                 }
 
                 //draw black kings
                 if(pieces[row][col].getType() == 1 && pieces[row][col].getColors() == Pieces.Colors.BLACK) {
-                    canvas.drawBitmap(blackKing, 50 + (col * 100), 50 + (row * 100), imagePaint);
+                    canvas.drawBitmap(blackKing, 40 + (col * 115), 40 + (row * 115), imagePaint);
                 }
 
                 //draw red pawns
                 if(pieces[row][col].getType() == 0 && pieces[row][col].getColors() == Pieces.Colors.RED) {
-                    canvas.drawBitmap(redPawn, 50 + (col * 100), 50 + (row * 100), imagePaint);
+                    canvas.drawBitmap(redPawn, 40 + (col * 115), 40 + (row * 115), imagePaint);
                 }
 
                 //draw red kings
                 if(pieces[row][col].getType() == 1 && pieces[row][col].getColors() == Pieces.Colors.RED) {
-                    canvas.drawBitmap(redKing, 50 + (col * 100), 50 + (row * 100), imagePaint);
+                    canvas.drawBitmap(redKing, 40 + (col * 115), 40 + (row * 115), imagePaint);
                 }
             }
         }
@@ -283,16 +283,73 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
 
 
     @Override
-    public boolean onTouch(View v, MotionEvent event) {
+    public boolean onTouch(View v, MotionEvent motionEvent) {
+        /*
         int touchedX = (int)event.getX() - 50;
         int touchedY = (int)event.getY() - 50;
 
-        int x_idx = touchedY / 100;
-        int y_idx = touchedX / 100;
+        int x_idx = touchedY / 115;
+        int y_idx = touchedX / 115;
 
         Log.i("X INDEX", Integer.toString(x_idx));
         Log.i("Y INDEX", Integer.toString(y_idx));
         Log.i("MSG", pieces[x_idx][y_idx].toString());
+
+*/
+
+        if(motionEvent.getActionMasked() == MotionEvent.ACTION_DOWN) {
+            for(int i = 0; i < board.length; i++) {
+                for(int j = 0; j < board[i].length; j++) {
+                    if (motionEvent.getX() > 20 + (i * 115) && motionEvent.getX() < 175 + (i * 115)) {
+                        if (motionEvent.getY() > 20 + (j * 115) && motionEvent.getY() < 175 + (j * 115)) {
+                            for (int index = 0; index < xMoves.size(); index++) {
+                                if(xMoves.get(index) == i && yMoves.get(index) == j) {
+                                    pieces[i][j] = pieces [row][col];
+                                    pieces[row][col] = new Pieces(0,Pieces.Colors.EMPTY, row, col);
+                                    board[row][col] = 0;
+                                    for (int k = 0; k < xMoves.size(); k++){
+                                        board[xMoves.get(k)][yMoves.get(k)] = 0;
+                                    }
+                                    xMoves.clear();
+                                    yMoves.clear();
+                                    invalidate();
+                                    return true;
+                                }
+                            }
+                            if (row != 8 && col != 8) {
+                                board[row][col] = 0;
+                                for (int index = 0; index < xMoves.size(); index++) {
+                                    board[xMoves.get(index)][yMoves.get(index)] = 0;
+                                }
+                                row = 8;
+                                col = 8;
+                                xMoves.clear();
+                                yMoves.clear();
+                                invalidate();
+                                if (pieces[i][j].getColors() == Pieces.Colors.BLACK || pieces[i][j].getColors() == Pieces.Colors.EMPTY){
+                                    return true;
+                                }
+                            }
+                            if(pieces[i][j].getColors() == Pieces.Colors.BLACK || pieces[i][j].getColors() == Pieces.Colors.EMPTY) {
+                                return true;
+                            }
+                            row = i;
+                            col = j;
+                            board[row][col] = 1;
+
+                            movePiece();
+
+                            for(int index = 0; index < xMoves.size(); index++) {
+                                board[xMoves.get(index)][yMoves.get(index)] = 2;
+                            }
+                            invalidate();
+                            return true;
+                        }
+                    }
+                }
+            }
+
+        }
 
         return false;
     }
