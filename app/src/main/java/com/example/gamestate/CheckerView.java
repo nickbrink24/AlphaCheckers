@@ -40,8 +40,10 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener {
     //Arraylists to store possible moves
     private ArrayList<Integer> xMoves = new ArrayList<>();
     private ArrayList<Integer> yMoves = new ArrayList<>();
+    //Arraylists to store AI's possible moves
     private ArrayList<Integer> aixMoves = new ArrayList<>();
     private ArrayList<Integer> aiyMoves = new ArrayList<>();
+    //Arraylists to store current AI Position
     private ArrayList<Integer> AIX = new ArrayList<>();
     private ArrayList<Integer> AIY = new ArrayList<>();
 
@@ -194,6 +196,7 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener {
     }
 
     public void RandomMove() {
+        // Fill-in to make sure Arrays are never empty
         AIX.add(1);
         AIY.add(1);
         aixMoves.add(1);
@@ -235,6 +238,7 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener {
                 }
             }
         }
+        // Get random index from Arraylists, move the piece, and replace with empty
         int randomIndex = (int) (Math.random() * AIX.size() - 1);
         int randomX = AIX.get(randomIndex);
         int randomY = AIY.get(randomIndex);
@@ -244,6 +248,20 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener {
         pieces[newRow][newCol] = pieces[randomX][randomY];
         pieces[randomX][randomY] = new Pieces(0, Pieces.Colors.EMPTY, randomX, randomY);
         board[randomX][randomY] = 0;
+
+        /**
+         * if (AIX.size() != 0 || AIY.size() != 0) {
+         *             int randomIndex = (int) Math.floor(Math.random() * AIX.size());
+         *             int randomX = AIX.get(randomIndex);
+         *             int randomY = AIY.get(randomIndex);
+         *             int newRow = aixMoves.get(randomIndex);
+         *             int newCol = aiyMoves.get(randomIndex);
+         *
+         *             pieces[newRow][newCol] = pieces[randomX][randomY];
+         *             pieces[randomX][randomY] = new Pieces(0, Pieces.Colors.EMPTY, randomX, randomY);
+         *             board[randomX][randomY] = 0;
+         * }
+         */
 
         for (int k = 0; k < aixMoves.size(); k++) {
             board[aiyMoves.get(k)][aixMoves.get(k)] = 0;
