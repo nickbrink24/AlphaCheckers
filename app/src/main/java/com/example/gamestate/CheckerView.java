@@ -330,6 +330,13 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
                                     }
                                     xMoves.clear();
                                     yMoves.clear();
+
+                                    //ai moves after player moves
+                                    RandomMove();
+                                    AIX.clear();
+                                    AIY.clear();
+                                    aixMoves.clear();
+                                    aiyMoves.clear();
                                     invalidate();
                                     return true;
                                 }
@@ -362,19 +369,12 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
                             }
                             invalidate();
 
-                            try {
-                                Thread.sleep(2000);
-                            } catch (InterruptedException e) {
-                                throw new RuntimeException(e);
-                            }
 
-                            RandomMove();
-                            AIX.clear();
-                            AIY.clear();
-                            aixMoves.clear();
-                            aiyMoves.clear();
-                            return true;
+
+
                         }
+
+
                     }
                 }
             }
