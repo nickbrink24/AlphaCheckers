@@ -187,6 +187,7 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
     public void movePiece(){
         if (pieces[row][col].getType() == 0) {
             movePawn();
+
         }
         else {
             moveKing();
@@ -280,6 +281,16 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
             }
         }
 
+        //check remaining captures
+        else if (col == 1 && row > 1) {
+            if(pieces[row - 1][col + 1].getColors() == Pieces.Colors.BLACK && pieces[row - 2][col + 2].getColors() == Pieces.Colors.EMPTY && row > 1) {
+                xMoves.add(row - 2);
+                yMoves.add(col + 2);
+                pieces[row - 1][col + 1].setColor(Pieces.Colors.EMPTY);
+            }
+        }
+
+
         //pawn is not on the border of the board
         else if (row > 0) {
             if (pieces[row - 1][col - 1].getColors() == Pieces.Colors.EMPTY) {
@@ -292,14 +303,6 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
             }
         }
 
-        //check remaining captures
-        if (col == 1 && row > 1) {
-            if(pieces[row - 1][col + 1].getColors() == Pieces.Colors.BLACK && pieces[row - 2][col + 2].getColors() == Pieces.Colors.EMPTY && row > 1) {
-                xMoves.add(row - 2);
-                yMoves.add(col + 2);
-                pieces[row - 1][col + 1].setColor(Pieces.Colors.EMPTY);
-            }
-        }
 
         else if (col == 6 && row > 1){
             if(pieces[row - 1][col - 1].getColors() == Pieces.Colors.BLACK && pieces[row - 2][col - 2].getColors() == Pieces.Colors.EMPTY && row > 1) {
@@ -309,12 +312,12 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
             }
         }
 
-        else if ((col > 1 || col < 6) && row > 1){
+        else if ((col > 1 && col < 6) && row > 1){
             if(pieces[row - 1][col - 1].getColors() == Pieces.Colors.BLACK && pieces[row - 2][col - 2].getColors() == Pieces.Colors.EMPTY && row > 1) {
                 xMoves.add(row - 2);
                 yMoves.add(col - 2);
                 pieces[row - 1][col - 1].setColor(Pieces.Colors.EMPTY);
-            } else if (pieces[row - 1][col + 1].getColors() == Pieces.Colors.BLACK && pieces[row - 2][col + 2].getColors() == Pieces.Colors.EMPTY && row > 1) {
+            }  if (pieces[row - 1][col + 1].getColors() == Pieces.Colors.BLACK && pieces[row - 2][col + 2].getColors() == Pieces.Colors.EMPTY && row > 1) {
                 xMoves.add(row - 2);
                 yMoves.add(col + 2);
                 pieces[row - 1][col + 1].setColor(Pieces.Colors.EMPTY);
