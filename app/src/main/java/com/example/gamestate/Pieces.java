@@ -30,6 +30,9 @@ public class Pieces {
         this.x = x;
         this.y = y;
     }
+    public Pieces(Colors color) {
+        this.color = color;
+    }
 
     // Deep constructor
     public Pieces(Pieces p) {
