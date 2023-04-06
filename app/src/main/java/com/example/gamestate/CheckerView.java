@@ -7,16 +7,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
-
 import java.util.ArrayList;
 
 public class CheckerView extends SurfaceView implements View.OnTouchListener{
-
-
     //paint variables
     protected Paint imagePaint;
     private Paint squareColor;
@@ -43,6 +39,10 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
     //Arraylists to store possible moves
     private ArrayList<Integer> xMoves = new ArrayList<>();
     private ArrayList<Integer> yMoves = new ArrayList<>();
+    private ArrayList<Integer> aixMoves = new ArrayList<>();
+    private ArrayList<Integer> aiyMoves = new ArrayList<>();
+    private ArrayList<Integer> AIX = new ArrayList<>();
+    private ArrayList<Integer> AIY = new ArrayList<>();
 
     //dimensions of board
     private int row = 7;
@@ -87,7 +87,6 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
     public void placePieces() {
         for (int row = 0; row < pieces.length; row++) {
             for (int col = 0; col < pieces[row].length; col++) {
-
                 //fill first and third row with black pieces
                 if (row == 0 || row == 2) {
                     if (col % 2 == 0) {
@@ -99,7 +98,6 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
                         pieces[row][col] = new Pieces(0, Pieces.Colors.EMPTY, row, col);
                     }
                 }
-
                 //fill second row with black pieces
                 else if (row == 1) {
                     if (col % 2 != 0) {
@@ -110,7 +108,6 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
                         pieces[row][col] = new Pieces(0, Pieces.Colors.EMPTY, row, col);
                     }
                 }
-
                 //fill sixth and eighth row with red pieces
                 else if (row == 5 || row == 7) {
                     if (col % 2 != 0) {
@@ -121,7 +118,6 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
                         pieces[row][col] = new Pieces(0, Pieces.Colors.EMPTY, row, col);
                     }
                 }
-
                 //fill seventh row with red pieces
                 else if (row == 6) {
                     if (col % 2 == 0) {
@@ -142,7 +138,6 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
 
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         //board initialization
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -159,7 +154,6 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
                         (right - left) * i, bottom + (bottom - top) * j, squareColor);
             }
         }
-
         //draw all the pieces
         for(int row = 0; row < pieces.length; row++) {
             for (int col = 0; col < pieces[row].length; col++) {
@@ -196,6 +190,59 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
         }
         else {
             moveKing();
+        }
+    }
+
+    public void RandomMove() {
+        for (int x = 0; x < board.length - 1; x++) {
+            for (int y = 0; y < board[x].length - 1; y++) {
+                //check pawn on left most side of the board
+                if (y == 0) {
+                    if (pieces[x + 1][y + 1].getColors() == Pieces.Colors.EMPTY && pieces[x][y].getColors() == Pieces.Colors.BLACK) {
+                        AIX.add(x);
+                        AIY.add(y);
+                        aixMoves.add(x + 1);
+                        aiyMoves.add(y + 1);
+                    }
+                }
+                //check pawn on right most side of the board
+                else if (y == 7) {
+                    if (pieces[x + 1][y - 1].getColors() == Pieces.Colors.EMPTY && pieces[x][y].getColors() == Pieces.Colors.BLACK) {
+                        AIX.add(x);
+                        AIY.add(y);
+                        aixMoves.add(x + 1);
+                        aiyMoves.add(y - 1);
+                    }
+                }
+                //pawn is not on the border of the board
+                else {
+                    if (pieces[x + 1][y - 1].getColors() == Pieces.Colors.EMPTY && pieces[x][y].getColors() == Pieces.Colors.BLACK) {
+                        AIX.add(x);
+                        AIY.add(y);
+                        aixMoves.add(x + 1);
+                        aiyMoves.add(y - 1);
+                    }
+                    if (pieces[x + 1][y + 1].getColors() == Pieces.Colors.EMPTY && pieces[x][y].getColors() == Pieces.Colors.BLACK) {
+                        AIX.add(x);
+                        AIY.add(y);
+                        aixMoves.add(x + 1);
+                        aiyMoves.add(y + 1);
+                    }
+                }
+            }
+        }
+        int randomIndex = (int) (Math.random() * AIX.size());
+        int randomX = AIX.get(randomIndex);
+        int randomY = AIY.get(randomIndex);
+        int newRow = aixMoves.get(randomIndex);
+        int newCol = aiyMoves.get(randomIndex);
+
+        pieces[newRow][newCol] = pieces[randomX][randomY];
+        pieces[randomX][randomY] = new Pieces(0, Pieces.Colors.EMPTY, randomX, randomY);
+        board[randomX][randomY] = 0;
+
+        for (int k = 0; k < aixMoves.size(); k++) {
+            board[aiyMoves.get(k)][aixMoves.get(k)] = 0;
         }
     }
 
@@ -257,45 +304,13 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
                 yMoves.add(col - 2);
             }
         }
-/*
-        else {
-            if (pieces[row - 1][col - 1].getColors() == Pieces.Colors.BLACK && pieces[row - 2][col - 2].getColors() == Pieces.Colors.EMPTY) {
-                xMoves.add(row - 2);
-                yMoves.add(col - 2);
-            }*/
-            //if(pieces[row - 1][col + 1].getColors() == Pieces.Colors.BLACK && pieces[row - 2][col + 2].getColors() == Pieces.Colors.EMPTY){
-              //  xMoves.add(row - 1);
-                //yMoves.add(col + 2);
-           // }
-        }
-
+    }
 
     //movement for kings
-    public void moveKing() {
-
-    }
-
-    //movement for AI
-    public void opponentMove() {
-
-    }
-
+    public void moveKing() { }
 
     @Override
     public boolean onTouch(View v, MotionEvent motionEvent) {
-        /*
-        int touchedX = (int)event.getX() - 50;
-        int touchedY = (int)event.getY() - 50;
-
-        int x_idx = touchedY / 115;
-        int y_idx = touchedX / 115;
-
-        Log.i("X INDEX", Integer.toString(x_idx));
-        Log.i("Y INDEX", Integer.toString(y_idx));
-        Log.i("MSG", pieces[x_idx][y_idx].toString());
-
-*/
-
         if(motionEvent.getActionMasked() == MotionEvent.ACTION_DOWN) {
             for(int i = 0; i < board.length; i++) {
                 for(int j = 0; j < board[i].length; j++) {
@@ -335,21 +350,26 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
                             row = j;
                             col = i;
                             board[row][col] = 1;
-
                             movePiece();
 
                             for(int index = 0; index < xMoves.size(); index++) {
                                 board[xMoves.get(index)][yMoves.get(index)] = 2;
                             }
                             invalidate();
+
+                            try {
+                                Thread.sleep(2000);
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+
+                            RandomMove();
                             return true;
                         }
                     }
                 }
             }
-
         }
-
         return false;
     }
 }
