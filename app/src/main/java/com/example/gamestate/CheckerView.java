@@ -261,6 +261,7 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
             if (pieces[row - 1][col + 1].getColors() == Pieces.Colors.BLACK && pieces[row - 2][col + 2].getColors() == Pieces.Colors.EMPTY) {
                 xMoves.add(row - 2);
                 yMoves.add(col + 2);
+                pieces[row - 1][col + 1].setColor(Pieces.Colors.EMPTY);
             }
         }
 
@@ -275,6 +276,7 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
             if(pieces[row - 1][col - 1].getColors() == Pieces.Colors.BLACK && pieces[row - 2][col - 2].getColors() == Pieces.Colors.EMPTY) {
                 xMoves.add(row - 2);
                 yMoves.add(col - 2);
+                pieces[row - 1][col - 1].setColor(Pieces.Colors.EMPTY);
             }
         }
 
@@ -295,6 +297,7 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
             if(pieces[row - 1][col + 1].getColors() == Pieces.Colors.BLACK && pieces[row - 2][col + 2].getColors() == Pieces.Colors.EMPTY) {
                 xMoves.add(row - 2);
                 yMoves.add(col + 2);
+                pieces[row - 1][col + 1].setColor(Pieces.Colors.EMPTY);
             }
         }
 
@@ -302,6 +305,7 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
             if(pieces[row - 1][col - 1].getColors() == Pieces.Colors.BLACK && pieces[row - 2][col - 2].getColors() == Pieces.Colors.EMPTY) {
                 xMoves.add(row - 2);
                 yMoves.add(col - 2);
+                pieces[row - 1][col - 1].setColor(Pieces.Colors.EMPTY);
             }
         }
     }
@@ -350,6 +354,7 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
                             row = j;
                             col = i;
                             board[row][col] = 1;
+
                             movePiece();
 
                             for(int index = 0; index < xMoves.size(); index++) {
