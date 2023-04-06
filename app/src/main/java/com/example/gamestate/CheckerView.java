@@ -395,6 +395,8 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener {
                                     return true;
                                 }
                             }
+
+                            //reset after every touch
                             if (row != 7 && col != 7) {
                                 board[row][col] = 0;
                                 for (int index = 0; index < xMoves.size(); index++) {
