@@ -246,6 +246,20 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
         pieces[randomX][randomY] = new Pieces(0, Pieces.Colors.EMPTY, randomX, randomY);
         board[randomX][randomY] = 0;
 
+        /**
+         * if (AIX.size() != 0 || AIY.size() != 0) {
+         *             int randomIndex = (int) Math.floor(Math.random() * AIX.size());
+         *             int randomX = AIX.get(randomIndex);
+         *             int randomY = AIY.get(randomIndex);
+         *             int newRow = aixMoves.get(randomIndex);
+         *             int newCol = aiyMoves.get(randomIndex);
+         *
+         *             pieces[newRow][newCol] = pieces[randomX][randomY];
+         *             pieces[randomX][randomY] = new Pieces(0, Pieces.Colors.EMPTY, randomX, randomY);
+         *             board[randomX][randomY] = 0;
+         * }
+         */
+
         for (int k = 0; k < aixMoves.size(); k++) {
             board[aiyMoves.get(k)][aixMoves.get(k)] = 0;
         }
