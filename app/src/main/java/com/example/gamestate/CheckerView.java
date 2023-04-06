@@ -364,6 +364,10 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
                             }
 
                             RandomMove();
+                            AIX.clear();
+                            AIY.clear();
+                            aixMoves.clear();
+                            aiyMoves.clear();
                             return true;
                         }
                     }
