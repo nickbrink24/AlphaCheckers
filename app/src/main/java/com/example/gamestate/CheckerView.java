@@ -56,7 +56,7 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener {
     private ArrayList<Integer> AIX = new ArrayList<>();
     private ArrayList<Integer> AIY = new ArrayList<>();
 
-    //dimensions of board
+    //dimensions
     private int row = 7;
     private int col = 7;
 
