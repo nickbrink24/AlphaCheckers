@@ -13,6 +13,15 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+/**
+ * @author Griselda
+ * @author Katherine
+ * @author Ruth
+ * @author Nick
+ * @author Ethan
+ * @version 4.6.2023
+ */
+
 public class CheckerView extends SurfaceView implements View.OnTouchListener {
     //paint variables
     protected Paint imagePaint;
