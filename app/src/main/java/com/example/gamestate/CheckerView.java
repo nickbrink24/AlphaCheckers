@@ -257,7 +257,7 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener {
         pieces[newRow][newCol] = pieces[randomX][randomY];
         pieces[randomX][randomY] = new Pieces(0, Pieces.Colors.EMPTY, randomX, randomY);
         board[randomX][randomY] = 0;
-
+        // Back-up code for out of bounds error
         /**
          * if (AIX.size() != 0 || AIY.size() != 0) {
          *             int randomIndex = (int) Math.floor(Math.random() * AIX.size());
