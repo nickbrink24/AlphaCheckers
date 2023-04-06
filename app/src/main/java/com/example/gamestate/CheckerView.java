@@ -45,8 +45,8 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
     private ArrayList<Integer> AIY = new ArrayList<>();
 
     //dimensions of board
-    private int row = 7;
-    private int col = 7;
+    private int row;
+    private int col;
 
     public CheckerView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -309,7 +309,7 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
             }
         }
 
-        else if ((col > 1 || col < 6) && row > 1){
+        else if ((col > 1 && col < 6) && row > 1){
             if(pieces[row - 1][col - 1].getColors() == Pieces.Colors.BLACK && pieces[row - 2][col - 2].getColors() == Pieces.Colors.EMPTY && row > 1) {
                 xMoves.add(row - 2);
                 yMoves.add(col - 2);
@@ -330,11 +330,11 @@ public class CheckerView extends SurfaceView implements View.OnTouchListener{
         if(motionEvent.getActionMasked() == MotionEvent.ACTION_DOWN) {
             for(int i = 0; i < board.length; i++) {
                 for(int j = 0; j < board[i].length; j++) {
-                    if (motionEvent.getX() > 20 + (i * 115) && motionEvent.getX() < 175 + (i * 115)) {
-                        if (motionEvent.getY() > 20 + (j * 115) && motionEvent.getY() < 175 + (j * 115)) {
+                    if ((int)motionEvent.getX() > 20 + (i * 115) && (int)motionEvent.getX() < 175 + (i * 115)) {
+                        if ((int)motionEvent.getY() > 20 + (j * 115) && (int)motionEvent.getY() < 175 + (j * 115)) {
                             for (int index = 0; index < xMoves.size(); index++) {
-                                if(xMoves.get(index) == j && yMoves.get(index) == i) {
-                                    pieces[j][i] = pieces[row][col];
+                                if(xMoves.get(index) == i && yMoves.get(index) == j) {
+                                    pieces[i][j] = pieces[row][col];
                                     pieces[row][col] = new Pieces(0,Pieces.Colors.EMPTY, row, col);
                                     board[row][col] = 0;
                                     for (int k = 0; k < xMoves.size(); k++){
